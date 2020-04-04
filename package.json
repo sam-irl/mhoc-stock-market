@@ -1,0 +1,28 @@
+{
+  "name": "mhoc-stock-market",
+  "version": "0.0.1",
+  "description": "A stock market for MHoC.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "export SESSION_SECRET=$(head -c20 /dev/urandom | base64) && export PORT=8080 && node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sam-irl/mhoc-stock-market.git"
+  },
+  "author": "lily-irl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sam-irl/mhoc-stock-market/issues"
+  },
+  "homepage": "https://github.com/sam-irl/mhoc-stock-market#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.1",
+    "express-session": "^1.17.0",
+    "passport": "^0.4.1",
+    "passport-reddit": "^0.2.4",
+    "pug": "^2.0.4"
+  }
+}
