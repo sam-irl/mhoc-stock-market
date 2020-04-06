@@ -5,8 +5,24 @@ html(lang='en')
         meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
         // use bootstrap via CDN
         link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+        link(rel='stylesheet' href='/css/index.css')
         title MHoC Stock Market
     body
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+            a(href='#').navbar-brand MHoC Stock Market
+            button(type='button' data-toggle='collapse' data-target='#navbarSupportedContent').navbarToggler
+                span.navbar-toggler-icon
+            #navbarSupportedContent.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item
+                        a(href='/') Home
+                    li.nav-item
+                        a(href='/companies') Companies
+                    if user
+                        li.nav-item.dropdown
+                            a(href='#' role='button' data-toggle='dropdown')#tradesDropdownLink.nav-link.dropdown-toggle
+                            .dropdown-menu
+                                
         block content
         // required scripts for bootstrap
         script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')

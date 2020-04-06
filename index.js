@@ -2,16 +2,23 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-const path = require('path')
+const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 const {
+    MONGOOSE_CONNECT_URI,
+    APP_DEPLOYMENT_URL,
+    APP_DEPLOYMENT_PORT,
     REDDIT_CONSUMER_KEY,
     REDDIT_CONSUMER_SECRET
-} = require('./credentials.json');
+} = require('./config.json');
 const SESSION_SECRET = process.env.SESSION_SECRET || 'insecure secret';
+const url = APP_DEPLOYMENT_URL || 'http://localhost';
+const port = APP_DEPLOYMENT_PORT || 3000;
+
+mongoose.connect(MONGOOSE_CONNECT_URI, { useNewUrlParser: true });
 
 app.use(session({
     secret: SESSION_SECRET,
@@ -24,7 +31,7 @@ app.use(passport.session());
 passport.use(new RedditStrategy({
     clientID: REDDIT_CONSUMER_KEY,
     clientSecret: REDDIT_CONSUMER_SECRET,
-    callbackURL: "https://stocks.lily-irl.com/auth/reddit/callback"
+    callbackURL: url + "/auth/reddit/callback"
 }, (accessToken, refreshToken, profile, done) => {
     return done(null, profile);
 }));
