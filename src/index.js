@@ -44,8 +44,9 @@ passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
 
+app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 const routes = {
     root: require('./routes/root')

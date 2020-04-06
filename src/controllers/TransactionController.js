@@ -48,6 +48,20 @@ class TransactionController {
         await UserController.addTransaction(purchaser, transaction);
         return transaction;
     }
+
+    /**
+     * Finds `Transaction`s subject to the given `filter`.
+     * In effect, the same as `Transaction.find()`.
+     *
+     * @for TransactionController
+     * @method findTransactions
+     * @param {Object} filter 
+     * @returns {Promise<Transaction[]>}
+     * @async
+     */
+    async findTransactions(filter = {}) {
+        return Transaction.find(filter);
+    }
 }
 
 export default new TransactionController();
