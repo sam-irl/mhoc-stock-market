@@ -20,9 +20,20 @@ html(lang='en')
                         a(href='/companies') Companies
                     if user
                         li.nav-item.dropdown
-                            a(href='#' role='button' data-toggle='dropdown')#tradesDropdownLink.nav-link.dropdown-toggle
+                            a(href='#' role='button' data-toggle='dropdown')#tradesDropdownLink.nav-link.dropdown-toggle My Trades
                             .dropdown-menu
-                                
+                                a(href='/me/trades/buy').dropdown-item Buy Orders
+                                a(href='/me/trades/sell').dropdown-item Sell Orders
+                                .dropdown-divider
+                                a(href='/me/transactions').dropdown-item Completed Transactions
+                        li.nav-item
+                            a(href='/me/portfolio') My Portfolio
+                        li.nav-item
+                            a(href='/me/profile') Profile
+            if user
+                a(href='/auth/logout').btn Logout
+            else
+                a(href='/auth/login').btn Login
         block content
         // required scripts for bootstrap
         script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')

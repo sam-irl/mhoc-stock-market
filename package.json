@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/sam-irl/mhoc-stock-market#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.1",
     "express-session": "^1.17.0",
@@ -25,5 +27,10 @@
     "passport": "^0.4.1",
     "passport-reddit": "^0.2.4",
     "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0"
   }
 }
