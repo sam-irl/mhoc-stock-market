@@ -13,7 +13,7 @@ const {
     APP_DEPLOYMENT_PORT,
     REDDIT_CONSUMER_KEY,
     REDDIT_CONSUMER_SECRET
-} = require('./config.json');
+} = require('../config.json');
 const SESSION_SECRET = process.env.SESSION_SECRET || 'insecure secret';
 const url = APP_DEPLOYMENT_URL || 'http://localhost';
 const port = APP_DEPLOYMENT_PORT || 3000;

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "export SESSION_SECRET=$(head -c20 /dev/urandom | base64) && export PORT=8080 && node ./index.js"
+    "build": "npx babel src -d out",
+    "server": "export SESSION_SECRET=$(head -c20 /dev/urandom | base64) && node ./out/index.js",
+    "deploy": "npm run build && npm run server"
   },
   "repository": {
     "type": "git",
