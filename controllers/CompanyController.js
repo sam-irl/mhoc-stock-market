@@ -16,7 +16,7 @@ class CompanyController {
      * @for CompanyController
      * @method findCompanyByName
      * @param {String} name
-     * @returns Promise<Company>
+     * @returns {Promise<Company>}
      * @async
      */
     async findCompanyByName(name) {
@@ -31,7 +31,7 @@ class CompanyController {
      * @for CompanyController
      * @method findCompanyByTicker
      * @param {String} ticker 
-     * @returns Promise<Company>
+     * @returns {Promise<Company>}
      * @async
      */
     async findCompanyByTicker(ticker) {
@@ -45,7 +45,7 @@ class CompanyController {
      * @for CompanyController
      * @method findCompaniesUserDirects
      * @param {User} user 
-     * @returns Promise<Company[]>
+     * @returns {Promise<Company[]>}
      * @async
      */
     async findCompaniesUserDirects(user) {
@@ -71,7 +71,7 @@ class CompanyController {
      * @param {User} primary 
      * @param {User} directors 
      * @param {Object} shareDistribution 
-     * @returns Promise
+     * @returns {Promise}
      * @async
      */
     async createNewCompany(name, ticker, primary, directors, shareDistribution) {

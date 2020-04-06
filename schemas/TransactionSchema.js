@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = require('./UserSchema');
-const ShareSchema = require('./ShareSchema');
+const CompanySchema = require('./CompanySchema');
 
 export default new Schema({
     seller: {
@@ -13,8 +13,20 @@ export default new Schema({
         type: UserSchema,
         required: true
     },
-    shares: {
-        type: [ShareSchema],
+    company: {
+        type: CompanySchema,
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    timestamp: {
+        type: Date,
         required: true
     }
 });
