@@ -51,6 +51,19 @@ class TransactionController {
     }
 
     /**
+     * Finds all of `user`'s transactions.
+     *
+     * @for TransactionController
+     * @method getUserTransactions
+     * @param {User} user 
+     * @returns {Promise<Transaction[]>}
+     * @async
+     */
+    async getUserTransactions(user) {
+        return this.findTransactions({ user: user.name });
+    }
+
+    /**
      * Finds `Transaction`s subject to the given `filter`.
      * In effect, the same as `Transaction.find()`.
      *

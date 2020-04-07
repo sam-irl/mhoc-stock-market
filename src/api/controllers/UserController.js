@@ -76,21 +76,6 @@ class UserController {
     }
 
     /**
-     * Adds a new `Transaction` to the user's transaction array.
-     *
-     * @for UserController
-     * @method addTransaction
-     * @param {User} user
-     * @param {Transaction} transaction
-     * @returns {Promise}
-     * @async 
-     */
-    async addTransaction(user, transaction) {
-        user.transactions.push(transaction);
-        return user.save();
-    }
-
-    /**
      * Returns the number of shares in `company` that `user` owns.
      *
      * @for UserController
@@ -118,9 +103,10 @@ class UserController {
      */
     async sellOrdersPlaceable(user, company) {
         const sharesInCompany = await this.sharesInCompany(user, company);
-        const sellOrdersInCompany = user.orders.filter(order => {
+        const sellOrders = await OrderController.getUserOrdersByType(user, sell)
+        const sellOrdersInCompany = sellOrders.filter(order => {
             return order.company._id === company._id && order.orderType === 'sell';
-        });
+        }).length;
         return sharesInCompany - sellOrdersInCompany;
     }
 
@@ -150,7 +136,7 @@ class UserController {
      */
     async cash(user) {
         const money = await money(user);
-        const orders = user.orders.filter(order => order.type === 'buy');
+        const orders = await OrderController.getUserOrdersByType(user, 'buy');
         const buyOrderMaxCost = 0;
         orders.forEach(order => {
             buyOrderMaxCost += (order.price + order.tolerance) * order.quantity;

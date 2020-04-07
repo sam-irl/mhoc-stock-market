@@ -28,4 +28,23 @@ router.post('/', isAuthenticated, (req, res) => {
     }
 });
 
+router.post('/user', isAuthenticated, (req, res) => {
+    if (!req.body.user) return res.status(200).json({ err: { status: 400, message: 'missing \'user\' parameter' } });
+    UserController.findUser(req.body.user)
+        .then(user => {
+            TransactionController.getUserTransactions(user)
+                .then(transactions => {
+                    res.status(200).json(transactions);
+                })
+                .catch(err => {
+                    console.error(err);
+                    res.status(500).json(err);
+                });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json(err);
+        });
+});
+
 export default router;
