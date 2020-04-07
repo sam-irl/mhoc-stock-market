@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const OrderController = require('./OrderController');
-const nubbank = require('../util/nubbank');
+const ShareController = require('./ShareController');
+const nubbank = require('../../util/nubbank');
 
 /**
  * The `UserController`, which coordinates all interactions with `User` models.
@@ -60,60 +61,18 @@ class UserController {
     }
 
     /**
-     * Adds the array of `Share`s provided to the user's share array.
-     *
-     * @for UserController
-     * @method addShares
-     * @param {User} user 
-     * @param {Share[]} shares
-     * @returns {Promise}
-     * @async 
-     */
-    async addShares(user, shares) {
-        user.shares.push(...shares);
-        return user.save();
-    }
-
-    /**
-     * Removes the array of `Share`s from the user's share array.
-     * If the user does not own a given `Share`, it won't be removed from
-     * their array.
-     *
-     * @for UserController
-     * @method removeShares
-     * @param {User} user 
-     * @param {Share[]} shares
-     * @returns {Promise}
-     * @async 
-     */
-    async removeShares(user, shares) {
-        shares.forEach(shareToRemove => {
-            user.shares = user.shares.filter(share => {
-                return share._id !== shareToRemove._id;
-            });
-        });
-        return user.save();
-    }
-
-    /**
      * Gets `amount` of `user`'s `Share`s in `company`.
      *
      * @for UserController
      * @method getShares
      * @param {User} user 
-     * @param {Number} amount
      * @param {Company} company
-     * @returns {Share[]}
+     * @param {Number} amount
+     * @returns {Promise<Share[]>}
+     * @async
      */
-    getShares(user, amount, company) {
-        const resultArray = [];
-        const shares = user.shares.filter(share => share.company._id === company._id);
-        for (let i = 0; i < amount; i++) {
-            if (shares[i]) {
-                resultArray.push(shares[i]);
-            }
-        }
-        return resultArray;
+    async getShares(user, company, amount) {
+        return ShareController.findUserSharesInCompany(user, company, amount)
     }
 
     /**
@@ -138,11 +97,11 @@ class UserController {
      * @method sharesInCompany
      * @param {User} user
      * @param {Company} company
-     * @returns {Number}
+     * @returns {Promise<Number>}
+     * @async
      */
-    sharesInCompany(user, company) {
-        const shares = user.shares.filter(share => share.company._id === company._id);
-        return shares.length;
+    async sharesInCompany(user, company) {
+        return ShareController.findUserSharesInCompany(user, company).length;
     }
 
     /**
@@ -154,10 +113,11 @@ class UserController {
      * @method sellOrdersPlaceable
      * @param {User} user
      * @param {Company} company
-     * @returns {Number}
+     * @returns {Promise<Number>}
+     * @async
      */
-    sellOrdersPlaceable(user, company) {
-        const sharesInCompany = this.sharesInCompany(user, company);
+    async sellOrdersPlaceable(user, company) {
+        const sharesInCompany = await this.sharesInCompany(user, company);
         const sellOrdersInCompany = user.orders.filter(order => {
             return order.company._id === company._id && order.orderType === 'sell';
         });

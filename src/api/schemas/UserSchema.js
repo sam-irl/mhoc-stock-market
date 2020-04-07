@@ -14,7 +14,6 @@ export default new Schema({
         type: String,
         required: true
     },
-    shares: [ShareSchema],
     transactions: [TransactionSchema],
     orders: [OrderSchema]
 });

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = require('./UserSchema');
-const ShareSchema = require('./ShareSchema');
 
 export default new Schema({
     ticker: {
@@ -19,7 +18,6 @@ export default new Schema({
         required: true
     },
     directors: [UserSchema],
-    shares: [ShareSchema],
     id: {
         type: String,
         required: true

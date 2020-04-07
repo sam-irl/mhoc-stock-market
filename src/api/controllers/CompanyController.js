@@ -87,13 +87,8 @@ class CompanyController {
         for (let i = 0; i < usersOwningShares.length; i++) {
             const name = usersOwningShares[i];
             const user = await UserController.findUser(name);
-            const createdShares = await ShareController.createNewShares(company, shareDistribution[name]);
-            user.shares.push(...createdShares);
-            sharesInCompany.push(...createdShares);
-            await user.save();
+            await ShareController.createNewShares(company, user, shareDistribution[name]);
         }
-        company.shares = sharesInCompany;
-        return company.save();
     }
 }
 

@@ -24,7 +24,7 @@ class TransactionController {
      * @async
      */
     async createTransaction(seller, purchaser, company, quantity, price) {
-        const shares = UserController.getShares(seller, quantity, company);
+        const shares = await UserController.getShares(seller, company, quantity);
         const purchaserMoney = await UserController.money(purchaser);
         if (price * quantity * 1.05 > purchaserMoney) {
             throw Error(`${purchaser.name} does not have enough money to purchase ${quantity} shares in ${company.ticker}!`);
@@ -42,8 +42,10 @@ class TransactionController {
         });
         await transaction.save();
         await UserController.pay(purchaser, seller, quantity, `${quantity} ${company.ticker} @ ${price}: ${seller.name} -> ${purchaser.name}`);
-        await UserController.removeShares(seller, shares);
-        await UserController.addShares(purchaser, shares);
+        shares.forEach(share => {
+            share.owner = purchaser;
+            await share.save();
+        });
         await UserController.addTransaction(seller, transaction);
         await UserController.addTransaction(purchaser, transaction);
         return transaction;

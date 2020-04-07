@@ -75,7 +75,7 @@ class OrderController {
         if (type === 'buy') {
             return Order.find({ company: company, type: 'sell' });
         } else if (type === 'sell') {
-            return order.find({ company: company, type: 'buy' });
+            return Order.find({ company: company, type: 'buy' });
         } else {
             throw Error('invalid order type to get complement orders');
         }
