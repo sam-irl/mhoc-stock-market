@@ -1,7 +1,7 @@
-const User = require('../models/User');
-const OrderController = require('./OrderController');
-const ShareController = require('./ShareController');
-const nubbank = require('../../util/nubbank');
+import OrderController from './OrderController';
+import ShareController from './ShareController';
+import User from '../models/User';
+import nubbank from '../../util/nubbank';
 
 /**
  * The `UserController`, which coordinates all interactions with `User` models.

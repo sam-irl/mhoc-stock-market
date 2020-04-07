@@ -1,11 +1,12 @@
-const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const RedditStrategy = require('passport-reddit').Strategy;
-const path = require('path');
-const mongoose = require('mongoose');
+import express from 'express';
+import mongoose from 'mongoose';
+import path from 'path';
+import passport from 'passport';
+import passportreddit from 'passport-reddit';
+import session from 'express-session';
 
 const app = express();
+const RedditStrategy = passportreddit.Strategy;
 
 const {
     MONGOOSE_CONNECT_URI,

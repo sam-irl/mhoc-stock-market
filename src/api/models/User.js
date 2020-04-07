@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
-const UserSchema = require('../schemas/UserSchema');
+import mongoose from 'mongoose';
+import UserSchema from '../schemas/UserSchema';
 
 export default mongoose.model('User', UserSchema);

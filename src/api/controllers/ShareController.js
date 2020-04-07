@@ -1,4 +1,4 @@
-const Share = require('../models/Share');
+import Share from '../models/Share';
 
 /**
  * The ShareController, where shares are created and split.

@@ -1,6 +1,5 @@
-const Transaction = require('../models/Transaction');
-
-const UserController = require('./UserController');
+import UserController from './UserController';
+import Transaction from '../models/Transaction';
 
 /**
  * The TransactionController. Currently just provides the

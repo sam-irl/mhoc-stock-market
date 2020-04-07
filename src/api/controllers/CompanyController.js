@@ -1,6 +1,6 @@
-const Company = require('../models/Company');
-const ShareController = require('./ShareController');
-const UserController = require('./UserController');
+import Company from '../models/Company';
+import ShareController from './ShareController';
+import UserController from './UserController';
 
 /**
  * The CompanyController, where the app interfaces with companies

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
-const TransactionSchema = require('../schemas/TransactionSchema');
+import mongoose from 'mongoose';
+import TransactionSchema from '../schemas/TransactionSchema';
 
 export default mongoose.model('Transaction', TransactionSchema);

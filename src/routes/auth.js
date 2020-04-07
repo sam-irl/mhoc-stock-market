@@ -1,6 +1,7 @@
-const express = require('express');
-const passport = require('passport');
-const crypto = require('crypto');
+import crypto from 'crypto';
+import express from 'express';
+import passport from 'passport';
+
 const router = express.Router();
 
 router.get('/reddit', (req, res, next) => {

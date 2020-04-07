@@ -1,5 +1,5 @@
-const Order = require('../models/Order');
-const TransactionController = require('./TransactionController');
+import Order from '../models/Order';
+import TransactionController from './TransactionController';
 
 /**
  * The OrderController, where orders are made, queried, and filled.

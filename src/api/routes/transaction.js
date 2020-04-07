@@ -1,6 +1,9 @@
-const express = require('express');
+import express from 'express';
+import {
+    isAuthenticated,
+    isAllowed
+} from '../middleware/middleware';
+
 const router = express.Router();
 
-const { isAuthenticated, isAllowed } = require('../middleware/middleware');
-
-module.exports = router;
+export default router;

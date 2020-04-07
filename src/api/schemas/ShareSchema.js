@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import CompanySchema from './CompanySchema';
+import UserSchema from './UserSchema';
 
-const CompanySchema = require('./CompanySchema');
-const UserSchema = require('./UserSchema');
+const Schema = mongoose.Schema;
 
 export default new Schema({
     owner: {

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import UserSchema from './UserSchema';
 
-const UserSchema = require('./UserSchema');
+const Schema = mongoose.Schema;
 
 export default new Schema({
     ticker: {

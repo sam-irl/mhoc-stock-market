@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import CompanySchema from './CompanySchema';
+import User from '../models/User';
 
-const UserSchema = require('./UserSchema');
-const CompanySchema = require('./CompanySchema');
+const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
     user: {

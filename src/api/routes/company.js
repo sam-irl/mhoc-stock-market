@@ -1,6 +1,14 @@
-const express = require('express');
+import express from 'express';
+import CompanyController from '../controllers/CompanyController';
+import {
+    isAuthenticated,
+    isAllowed
+} from '../middleware/middleware';
+
 const router = express.Router();
 
-const { isAuthenticated, isAllowed } = require('../middleware/middleware');
+router.get('/', isAuthenticated, (req, res) => {
+    CompanyController.findCompanyByName
+});
 
-module.exports = router;
+export default router;

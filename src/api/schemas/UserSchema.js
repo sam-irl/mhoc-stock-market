@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import OrderSchema from './OrderSchema';
+import TransactionSchema from './TransactionSchema';
 
-const OrderSchema = require('./OrderSchema');
-const ShareSchema = require('./ShareSchema');
-const TransactionSchema = require('./TransactionSchema');
+const Schema = mongoose.Schema;
 
 export default new Schema({
     name: {
