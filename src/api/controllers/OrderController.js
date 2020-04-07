@@ -114,6 +114,26 @@ class OrderController {
             await buyOrder.deleteOne();
         }
     }
+
+    /**
+     * Finds `amount` of orders in `company`, subject
+     * to the given `filter`. If `amount` is not specified,
+     * all orders will be returned. If `filter` is not specified,
+     * it will default to no filter (`{}`).
+     *
+     * @for OrderController
+     * @method findOrders
+     * @param {Object} filter
+     * @param {Number} amount
+     * @returns {Promise<Order[]>}
+     * @async
+     */
+    async findOrders(filter = {}, amount = false) {
+        if (!amount) {
+            return Order.find(filter);
+        }
+        return Order.find(filter).limit(amount);
+    }
 }
 
 export default new OrderController();

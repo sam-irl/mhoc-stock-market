@@ -69,9 +69,9 @@ class CompanyController {
      * @param {String} name 
      * @param {String} ticker 
      * @param {User} primary 
-     * @param {User} directors 
+     * @param {User[]} directors 
      * @param {Object} shareDistribution 
-     * @returns {Promise}
+     * @returns {Promise<void>}
      * @async
      */
     async createNewCompany(name, ticker, primary, directors, shareDistribution) {
@@ -82,13 +82,31 @@ class CompanyController {
             directors: directors
         });
         await company.save();
-        const sharesInCompany = [];
         const usersOwningShares = Object.keys(shareDistribution);
         for (let i = 0; i < usersOwningShares.length; i++) {
             const name = usersOwningShares[i];
             const user = await UserController.findUser(name);
             await ShareController.createNewShares(company, user, shareDistribution[name]);
         }
+    }
+
+    /**
+     * Finds `amount` of companies. If `amount` isn't
+     * specified, finds all of the companies. Filters
+     * by `filter`.
+     *
+     * @for CompanyController
+     * @method findCompanies
+     * @param {Object} filter
+     * @param {Number} amount
+     * @returns {Promise<Company[]>}
+     * @async
+     */
+    findCompanies(filter = {}, amount = false) {
+        if (!amount) {
+            return Company.find(filter);
+        }
+        return Company.find(filter).limit(amount);
     }
 }
 
