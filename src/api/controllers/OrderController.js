@@ -62,6 +62,33 @@ class OrderController {
     }
 
     /**
+     * Gets all the orders for `user`.
+     *
+     * @for OrderController
+     * @method getUserOrders
+     * @param {User} user 
+     * @returns {Promise<Order[]>}
+     * @async
+     */
+    async getUserOrders(user) {
+        return Order.find({ user: user });
+    }
+
+    /**
+     * Gets all of the orders for `user` of the designated `type`.
+     *
+     * @for OrderController
+     * @method getUserOrdersByType
+     * @param {User} user 
+     * @param {String} type 
+     * @returns {Promise<Order[]>}
+     * @async
+     */
+    async getUserOrdersByType(user, type) {
+        return Order.find({ user: user, type: type });
+    }
+
+    /**
      * Gets all the orders in `company` of the opposing type of `type`.
      *
      * @for OrderController
@@ -103,10 +130,13 @@ class OrderController {
         );
         if (buyOrder.quantity > sellOrder.quantity) {
             buyOrder.quantity = buyOrder.quantity - sellOrder.quantity;
+            sellOrder.user.orders = sellOrder.user.orders.filter(order => order._id !== sellOrder._id);
+            await sellOrder.user.save();
             await buyOrder.save();
             await sellOrder.deleteOne();
         } else if (buyOrder.quantity < sellOrder.quantity) {
             sellOrder.quantity = sellOrder.quantity - buyOrder.quantity;
+            buyOrder.user.orders = buyOrder.user.orders.filter(order => order._id !== buyOrder._id);
             await sellOrder.save();
             await buyOrder.deleteOne();
         } else {

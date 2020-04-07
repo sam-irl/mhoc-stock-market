@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import CompanySchema from './CompanySchema';
-import User from '../models/User';
+import UserSchema from './UserSchema';
 
 const Schema = mongoose.Schema;
 
-const OrderSchema = new Schema({
+export default new Schema({
     user: {
         type: UserSchema,
         required: true
@@ -35,13 +35,3 @@ const OrderSchema = new Schema({
         required: true
     }
 });
-
-OrderSchema.pre('deleteOne', { document: true, query: false }, async function () {
-    const owner = await User.find({})
-        .where('orders')
-        .elemMatch({ _id: this._id })[0];
-    owner.orders = owner.orders.filter(order => order._id !== this._id);
-    return owner.save();
-});
-
-export default OrderSchema;

@@ -13,6 +13,5 @@ export default new Schema({
         type: String,
         required: true
     },
-    transactions: [TransactionSchema],
-    orders: [OrderSchema]
+    transactions: [TransactionSchema]
 });

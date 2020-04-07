@@ -4,6 +4,7 @@ import path from 'path';
 import passport from 'passport';
 import passportreddit from 'passport-reddit';
 import session from 'express-session';
+import api from './api/api';
 
 const app = express();
 const RedditStrategy = passportreddit.Strategy;
@@ -53,6 +54,7 @@ const routes = {
     root: require('./routes/root')
 };
 
+app.use('/api', api);
 app.use('/', routes.root);
 
 app.listen(port, () => console.log(`started mhoc-stock-market on port ${port}`));
