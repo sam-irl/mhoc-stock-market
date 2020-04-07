@@ -13,7 +13,7 @@ const {
     APP_DEPLOYMENT_PORT,
     REDDIT_CONSUMER_KEY,
     REDDIT_CONSUMER_SECRET
-} = require('../config.json');
+} = require(path.join(__dirname, '../config.json'));
 const SESSION_SECRET = process.env.SESSION_SECRET || 'insecure secret';
 const url = APP_DEPLOYMENT_URL || 'http://localhost';
 const port = APP_DEPLOYMENT_PORT || 3000;
@@ -44,7 +44,7 @@ passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
 
-app.set('views', path.join(__dirname, '../src/views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '../public')));
 

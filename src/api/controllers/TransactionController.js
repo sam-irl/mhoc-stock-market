@@ -42,10 +42,10 @@ class TransactionController {
         });
         await transaction.save();
         await UserController.pay(purchaser, seller, quantity, `${quantity} ${company.ticker} @ ${price}: ${seller.name} -> ${purchaser.name}`);
-        shares.forEach(share => {
-            share.owner = purchaser;
-            await share.save();
-        });
+        for (let i = 0; i < shares.length; i++) {
+            shares[i].owner = purchaser;
+            await shares[i].save();
+        }
         await UserController.addTransaction(seller, transaction);
         await UserController.addTransaction(purchaser, transaction);
         return transaction;

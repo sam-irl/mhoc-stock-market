@@ -2,12 +2,12 @@
   "name": "mhoc-stock-market",
   "version": "0.0.1",
   "description": "A stock market for MHoC.",
-  "main": "index.js",
+  "main": "./out/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx babel src -d out",
+    "build": "npx babel src --out-dir out --copy-files",
     "server": "export SESSION_SECRET=$(head -c20 /dev/urandom | base64) && node ./out/index.js",
-    "deploy": "npm run build && npm run server"
+    "start": "npm run build && npm run server"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.1",
     "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "passport": "^0.4.1",
     "passport-reddit": "^0.2.4",
