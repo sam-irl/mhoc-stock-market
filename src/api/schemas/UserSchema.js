@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import OrderSchema from './OrderSchema';
 import TransactionSchema from './TransactionSchema';
 
 const Schema = mongoose.Schema;
