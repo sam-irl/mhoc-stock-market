@@ -135,7 +135,7 @@ class UserController {
      * @async
      */
     async cash(user) {
-        const money = await money(user);
+        const money = await this.money(user);
         const orders = await OrderController.getUserOrdersByType(user, 'buy');
         const buyOrderMaxCost = 0;
         orders.forEach(order => {
@@ -181,7 +181,7 @@ class UserController {
      * @async
      */
     async placeBuyOrder(user, company, amount, price, tolerance, expires) {
-        const cash = await cash(user);
+        const cash = await this.cash(user);
         const maxSharePrice = (price + tolerance) * amount;
         if (maxSharePrice * 1.05 > cash) return false;
         return OrderController.createOrder(
