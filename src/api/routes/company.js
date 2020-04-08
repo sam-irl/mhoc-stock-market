@@ -64,6 +64,7 @@ router.post('/create', isAuthenticated, isAdmin, (req, res) => {
         req.body.hasOwnProperty('directors') &&
         req.body.hasOwnProperty('name') &&
         req.body.hasOwnProperty('ticker') &&
+        req.body.hasOwnProperty('id') &&
         req.body.hasOwnProperty('shareDistribution')
     )) {
         return res.status(422).json({ err: { status: 422, message: 'request body did not contain all requisite keys' } });
@@ -85,6 +86,7 @@ router.post('/create', isAuthenticated, isAdmin, (req, res) => {
                 req.body.ticker,
                 primaryUser,
                 directors,
+                req.body.id,
                 req.body.shareDistribution
             ).then(() => {
                 res.status(200).json({ status: 'ok' });

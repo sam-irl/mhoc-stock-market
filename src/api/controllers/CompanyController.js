@@ -70,16 +70,18 @@ class CompanyController {
      * @param {String} ticker 
      * @param {User} primary 
      * @param {User[]} directors 
+     * @param {String} id
      * @param {Object} shareDistribution 
      * @returns {Promise<void>}
      * @async
      */
-    async createNewCompany(name, ticker, primary, directors, shareDistribution) {
+    async createNewCompany(name, ticker, primary, directors, id, shareDistribution) {
         const company = new Company({
             name: name,
             ticker: ticker.toUpperCase(),
             primary: primary,
-            directors: directors
+            directors: directors,
+            id: id
         });
         await company.save();
         const usersOwningShares = Object.keys(shareDistribution);
