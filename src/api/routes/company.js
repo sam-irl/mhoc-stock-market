@@ -3,7 +3,7 @@ import CompanyController from '../controllers/CompanyController';
 import UserController from '../controllers/UserController';
 import {
     isAuthenticated,
-    isAllowed
+    isAdmin
 } from '../middleware/middleware';
 
 const router = express.Router();

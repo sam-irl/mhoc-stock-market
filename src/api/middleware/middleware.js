@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import path from 'path';
 const JWT_SECRET = require(path.join(__dirname, '../../../config.json'));
 
 export const isAuthenticated = (req, res, next) => {
