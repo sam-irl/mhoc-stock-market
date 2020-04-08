@@ -19,7 +19,7 @@ export const isAuthenticated = (req, res, next) => {
 
 export const isAdmin = (req, res, next) => {
     const admins = ['lily-irl']
-    if (req.decoded.user in admins) {
+    if (admins.includes(req.decoded.user)) {
         next()
     } else {
         res.status(403).json({ err: { code: 403, error: 'not an administrator' } });
@@ -29,7 +29,7 @@ export const isAdmin = (req, res, next) => {
 export const isAllowed = (req, res, next) => {
     if (!req.body.user) return res.status(400).json({ err: { status: 400, message: 'did not provide a username' } });
     const admins = ['lily-irl'];
-    if (req.decoded.user in admins || req.decoded.user === req.body.user) {
+    if (admins.includes(req.decoded.user) || req.decoded.user === req.body.user) {
         next()
     } else {
         res.status(403).json({ err: { code: 403, error: 'not an authorised user' } });
