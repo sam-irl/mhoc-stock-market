@@ -15,17 +15,17 @@ const apiLocation = 'https://bank.nub.international/v1/';
  * @param {String} username
  */
 export const userHasAccount = async (username) => {
-
+    return true;
 };
 
 export const getAccountID = async (username) => {
-
+    return 'foo';
 };
 
 export const getMoney = async (accountID) => {
-
+    return 100;
 };
 
 export const makePayment = async (fromAccountID, toAccountID, amount, message) => {
-
+    return true;
 };
